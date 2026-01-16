@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ product.name }}
+	- Backoffice
+{% endblock %}
+
+{% block body %}
+	<div class="max-w-2xl mx-auto space-y-6">
+		<div class="flex items-center gap-4">
+			<a href="{{ path('app_product_index') }}" class="p-2 text-gray-400 hover:text-white hover:bg-gray-700 rounded-lg">
+				<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+				</svg>
+			</a>
+			<h1 class="text-3xl font-bold text-white">{{ product.name }}</h1>
+		</div>
+
+		<div class="bg-gray-800/50 rounded-xl border border-gray-700/50 p-6 space-y-6">
+			<div class="flex items-center justify-between">
+				<span class="px-3 py-1 rounded-full text-sm font-medium {{ product.type == 'digital' ? 'bg-purple-500/20 text-purple-400' : 'bg-emerald-500/20 text-emerald-400' }}">
+					{{ product.type == 'digital' ? 'Numérique' : 'Physique' }}
+				</span>
+				<span class="text-2xl font-bold text-indigo-400">{{ product.price|number_format(2, ',', ' ') }}
+					€</span>
+			</div>
+
+			<div>
+				<h3 class="text-sm font-medium text-gray-400 mb-2">Description</h3>
+				<p class="text-gray-300">{{ product.description|default('Aucune description') }}</p>
+			</div>
+
+			{% if is_granted('PRODUCT_EDIT', product) %}
+				<div class="flex gap-4 pt-4 border-t border-gray-700">
+					<a href="{{ path('app_product_edit', {id: product.id, reset: 1}) }}" class="px-5 py-2.5 bg-indigo-600 text-white rounded-lg hover:bg-indigo-500">Modifier</a>
+				</div>
+			{% endif %}
+		</div>
+	</div>
+{% endblock %}
