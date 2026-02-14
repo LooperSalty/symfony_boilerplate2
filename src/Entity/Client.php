@@ -20,7 +20,7 @@ class Client
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank]
     #[Assert\Regex(
-        pattern: '/^[a-zA-Z\s\-àâäéèêëîïôöùûüç]+$/',
+        pattern: '/^[a-zA-Z\s\-\'àâäéèêëîïôöùûüçÀÂÄÉÈÊËÎÏÔÖÙÛÜÇ]+$/',
         message: 'Firstname contains illegal characters'
     )]
     private ?string $firstname = null;
@@ -28,7 +28,7 @@ class Client
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank]
     #[Assert\Regex(
-        pattern: '/^[a-zA-Z\s\-àâäéèêëîïôöùûüç]+$/',
+        pattern: '/^[a-zA-Z\s\-\'àâäéèêëîïôöùûüçÀÂÄÉÈÊËÎÏÔÖÙÛÜÇ]+$/',
         message: 'Lastname contains illegal characters'
     )]
     private ?string $lastname = null;
